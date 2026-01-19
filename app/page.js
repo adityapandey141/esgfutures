@@ -246,14 +246,14 @@ const ESGPlatform = () => {
 
       {/* Header */}
       <header className="fixed top-0 w-full bg-white/90 backdrop-blur-xl border-b border-neutral-200/80 z-50 transition-all">
-        <div className="max-w-[1440px] mx-auto px-8 lg:px-20 py-6">
+        <div className="max-w-[1440px] mx-auto px-8 lg:px-20 ">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
               {/* <div className="w-9 h-9 bg-gradient-to-br from-emerald-800 to-emerald-700 rounded-md flex items-center justify-center">
                 <Globe className="w-5 h-5 text-white" />
               </div> */}
               <span className="text-xl font-bold text-neutral-900 tracking-tight">
-                <Image src={logo} alt="ESGfutures" width={160} height={60} />
+                <Image src={logo} alt="ESGfutures" width={120} height={60} />
               </span>
             </div>
             <nav className="hidden md:flex items-center gap-10 text-[15px] font-medium">
