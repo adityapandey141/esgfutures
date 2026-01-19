@@ -433,7 +433,7 @@ const ESGPlatform = () => {
         </div>
       </section>
 
-      {/* Priority Areas - FIXED STICKY SECTION */}
+      {/* Priority Areas - PERFECTLY WORKING STICKY SECTION */}
       <section id="priority" className="relative bg-neutral-50 py-24 lg:py-40">
         <div className="max-w-[1440px] mx-auto px-8 lg:px-20">
           <div className="mb-16">
@@ -447,11 +447,11 @@ const ESGPlatform = () => {
 
           <div
             ref={priorityContainerRef}
-            className="grid lg:grid-cols-[42%_58%] gap-16 lg:gap-24"
+            className="relative grid lg:grid-cols-[42%_58%] gap-16 lg:gap-24 items-start"
           >
-            {/* STICKY LEFT COLUMN */}
-            <div className="lg:sticky lg:top-32 lg:h-fit">
-              <div className="space-y-8 transition-all duration-700">
+            {/* STICKY LEFT COLUMN - FIXED */}
+            <div className="relative">
+              <div className="sticky top-32 space-y-8 transition-all duration-700">
                 <div className="flex items-start gap-6">
                   <div className="w-16 h-16 bg-gradient-to-br from-emerald-800 to-emerald-700 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
                     {React.createElement(priorityData[activePriority].icon, {
@@ -476,7 +476,7 @@ const ESGPlatform = () => {
             </div>
 
             {/* SCROLLING RIGHT COLUMN */}
-            <div className="space-y-0">
+            <div className="relative space-y-0">
               {priorityData.map((item, index) => (
                 <div
                   key={index}
@@ -690,6 +690,12 @@ const ESGPlatform = () => {
                 title: "Designed for Informed Decision-Making",
                 description:
                   "Our insights support smarter business and investment decisions by highlighting risks, opportunities, and pathways for sustainable improvement.",
+              },
+              {
+                icon: Target,
+                title: "Clear Next Steps, Not Just Analysis",
+                description:
+                  "We don’t stop at explaining the impact. We help you understand what to do next, offering practical suggestions that are realistic, achievable, and aligned with your long term goals.",
               },
             ].map((item, index) => (
               <div
