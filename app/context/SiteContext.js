@@ -20,12 +20,12 @@ export const SiteProvider = ({ children }) => {
   const [error, setError] = useState(null);
 
   const API_BASE_URL =
-    process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+    process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
   // Fetch page content
   const fetchPageContent = async (pageName) => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/pages/${pageName}`);
+      const response = await axios.get(`${API_BASE_URL}/api/pages/${pageName}`);
       return response.data.content;
     } catch (error) {
       console.error(`Error fetching ${pageName} page:`, error);
@@ -59,7 +59,7 @@ export const SiteProvider = ({ children }) => {
   // Fetch team members
   const fetchTeamMembers = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/team`);
+      const response = await axios.get(`${API_BASE_URL}/api/team`);
       return response.data.teamMembers;
     } catch (error) {
       console.error("Error fetching team members:", error);

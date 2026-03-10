@@ -19,7 +19,8 @@ export const AuthProvider = ({ children }) => {
   const [error, setError] = useState(null);
 
   const API_BASE_URL =
-    process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+    process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+  const LOGIN_URL = `${API_BASE_URL}/api/auth/login`;
 
   // Set axios default header for auth
   useEffect(() => {
@@ -46,7 +47,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       setError(null);
-      const response = await axios.post(`${API_BASE_URL}/auth/login`, {
+      const response = await axios.post(LOGIN_URL, {
         email,
         password,
       });
