@@ -2,8 +2,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Image from "next/image";
-import logo from "../public/esg-logo.png";
+import Header from "./components/Header";
+import MainLayout from "./layouts/MainLayout";
 import {
   Globe,
   TrendingUp,
@@ -228,70 +228,7 @@ const ESGPlatform = () => {
   ];
 
   return (
-    <div
-      className="min-h-screen bg-white text-neutral-800 overflow-x-hidden"
-      style={{
-        fontFamily:
-          "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-      }}
-    >
-      {/* Premium grain texture */}
-      <div
-        className="fixed inset-0 pointer-events-none z-50 opacity-[0.015] mix-blend-overlay"
-        style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='3.5' numOctaves='5' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E\")",
-        }}
-      />
-
-      {/* Header */}
-      <header className="fixed top-0 w-full bg-white/90 backdrop-blur-xl border-b border-neutral-200/80 z-50 transition-all">
-        <div className="max-w-[1440px] mx-auto px-8 lg:px-20 ">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-2">
-              {/* <div className="w-9 h-9 bg-gradient-to-br from-emerald-800 to-emerald-700 rounded-md flex items-center justify-center">
-                <Globe className="w-5 h-5 text-white" />
-              </div> */}
-              <span className="text-xl font-bold text-neutral-900 tracking-tight">
-                <Image src={logo} alt="ESGfutures" width={120} height={60} />
-              </span>
-            </div>
-            <nav className="hidden md:flex items-center gap-10 text-[15px] font-medium">
-              <a
-                href="#priority"
-                className="text-neutral-600 hover:text-emerald-800 transition-colors"
-              >
-                Priority Areas
-              </a>
-              <a
-                href="#methodology"
-                className="text-neutral-600 hover:text-emerald-800 transition-colors"
-              >
-                Methodology
-              </a>
-              <a
-                href="#coverage"
-                className="text-neutral-600 hover:text-emerald-800 transition-colors"
-              >
-                Coverage
-              </a>
-              <a
-                href="#team"
-                className="text-neutral-600 hover:text-emerald-800 transition-colors"
-              >
-                Team
-              </a>
-              <a
-                href="#contact"
-                className="px-6 py-2.5 bg-emerald-800 text-white rounded-md hover:bg-emerald-700 transition-all"
-              >
-                Get Started
-              </a>
-            </nav>
-          </div>
-        </div>
-      </header>
-
+    <MainLayout currentPage="/">
       {/* Hero Section */}
       <section
         ref={heroRef}
@@ -950,83 +887,6 @@ const ESGPlatform = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-neutral-900 text-neutral-400 py-20">
-        <div className="max-w-[1440px] mx-auto px-8 lg:px-20">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-            <div>
-              <div className="flex items-center gap-2 mb-6">
-                <div className="w-9 h-9 bg-gradient-to-br from-emerald-700 to-emerald-600 rounded-md flex items-center justify-center">
-                  <Globe className="w-5 h-5 text-white" />
-                </div>
-                <span className="text-xl font-bold text-white">ESGFuture</span>
-              </div>
-              <p className="text-sm leading-relaxed mb-6">
-                Intelligence platform for sustainable decisions
-              </p>
-              <div className="flex gap-4">
-                <a
-                  href="#"
-                  className="w-10 h-10 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-emerald-800 transition-colors"
-                >
-                  <Globe className="w-5 h-5" />
-                </a>
-              </div>
-            </div>
-
-            <div>
-              <div className="text-xs uppercase tracking-wider text-neutral-500 font-semibold mb-5">
-                Methodology
-              </div>
-              <div className="space-y-2 text-sm">
-                <div className="text-neutral-300">Version 2.1</div>
-                <div>Updated Q1 2025</div>
-                <div>Research-Driven</div>
-              </div>
-            </div>
-
-            <div>
-              <div className="text-xs uppercase tracking-wider text-neutral-500 font-semibold mb-5">
-                Coverage
-              </div>
-              <div className="space-y-2 text-sm">
-                <div className="text-neutral-300">Global Reach</div>
-                <div>33+ Countries</div>
-                <div>892+ Companies</div>
-              </div>
-            </div>
-
-            <div>
-              <div className="text-xs uppercase tracking-wider text-neutral-500 font-semibold mb-5">
-                Frameworks
-              </div>
-              <div className="space-y-2 text-sm">
-                <div>SASB, GRI, TCFD</div>
-                <div>UN SDGs Aligned</div>
-                <div>CDP, ISSB Ready</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="pt-10 border-t border-neutral-800 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-xs text-neutral-500">
-              © 2025 ESGFuture. Institutional ESG Intelligence Platform.
-            </div>
-            <div className="flex gap-8 text-xs">
-              <a href="#" className="hover:text-emerald-500 transition-colors">
-                Privacy Policy
-              </a>
-              <a href="#" className="hover:text-emerald-500 transition-colors">
-                Terms of Service
-              </a>
-              <a href="#" className="hover:text-emerald-500 transition-colors">
-                Contact
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
-
       <style>{`
         @keyframes float {
           0%, 100% { transform: translateY(0px); }
@@ -1047,7 +907,7 @@ const ESGPlatform = () => {
           animation-delay: 1s;
         }
       `}</style>
-    </div>
+    </MainLayout>
   );
 };
 
