@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../../context/AuthContext";
+import { API_ENDPOINTS } from "../../config/api";
 import { useSite } from "../../context/SiteContext";
 import Link from "next/link";
 import axios from "axios";
@@ -39,7 +40,7 @@ const AdminReportsPage = () => {
   const fetchReports = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:5000/api/reports", {
+      const response = await axios.get(API_ENDPOINTS.REPORTS, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setReports(response.data.reports || []);
@@ -65,7 +66,7 @@ const AdminReportsPage = () => {
     if (!confirm("Are you sure you want to delete this report?")) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/reports/${id}`, {
+      await axios.delete(`${API_ENDPOINTS.REPORTS}/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       showNotification("Report deleted successfully", "success");

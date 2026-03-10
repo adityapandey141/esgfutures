@@ -2,8 +2,9 @@
 import React, { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { useAuth } from "../../../../context/AuthContext";
-import Link from "next/link";
+import { API_ENDPOINTS } from "../../../../config/api";
 import axios from "axios";
+import Link from "next/link";
 import {
   FileText,
   Users,
@@ -45,7 +46,7 @@ const EditReportPage = () => {
     const fetchReport = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/reports/id/${params.id}`,
+          API_ENDPOINTS.REPORT_BY_ID(params.id),
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -106,7 +107,7 @@ const EditReportPage = () => {
       }
 
       const response = await axios.put(
-        `http://localhost:5000/api/reports/${params.id}`,
+        `${API_ENDPOINTS.REPORTS}/${params.id}`,
         data,
         {
           headers: {

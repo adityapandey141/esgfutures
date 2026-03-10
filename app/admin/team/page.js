@@ -2,9 +2,10 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../../context/AuthContext";
+import { API_ENDPOINTS, getImageUrl } from "../../config/api";
+import axios from "axios";
 import { useSite } from "../../context/SiteContext";
 import Link from "next/link";
-import axios from "axios";
 import {
   FileText,
   Users,
@@ -37,7 +38,7 @@ const AdminTeamPage = () => {
   const fetchTeamMembers = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:5000/api/team", {
+      const response = await axios.get(API_ENDPOINTS.TEAM, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setTeamMembers(response.data.teamMembers || []);
@@ -63,7 +64,7 @@ const AdminTeamPage = () => {
     if (!confirm("Are you sure you want to delete this team member?")) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/team/${id}`, {
+      await axios.delete(API_ENDPOINTS.TEAM_BY_ID(id), {
         headers: { Authorization: `Bearer ${token}` },
       });
       showNotification("Team member deleted successfully", "success");
@@ -213,7 +214,7 @@ const AdminTeamPage = () => {
                     <div className="mb-4">
                       {member.profile_image ? (
                         <img
-                          src={`http://localhost:5000${member.profile_image}`}
+                          src={getImageUrl(member.profile_image)}
                           alt={member.name}
                           className="w-24 h-24 rounded-full mx-auto object-cover"
                         />

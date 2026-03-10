@@ -2,8 +2,9 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../../../context/AuthContext";
-import Link from "next/link";
+import { API_ENDPOINTS } from "../../../config/api";
 import axios from "axios";
+import Link from "next/link";
 import {
   FileText,
   Users,
@@ -67,16 +68,12 @@ const NewTeamMemberPage = () => {
         data.append("profile_image", profileImage);
       }
 
-      const response = await axios.post(
-        "http://localhost:5000/api/team",
-        data,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
-          },
+      const response = await axios.post(API_ENDPOINTS.TEAM, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
         },
-      );
+      });
 
       if (response.data) {
         setSuccess("Team member added successfully!");

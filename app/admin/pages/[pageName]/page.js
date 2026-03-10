@@ -2,8 +2,9 @@
 import React, { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { useAuth } from "../../../context/AuthContext";
-import Link from "next/link";
+import { API_ENDPOINTS } from "../../../config/api";
 import axios from "axios";
+import Link from "next/link";
 import {
   FileText,
   Users,
@@ -36,8 +37,10 @@ const PageEditorPage = () => {
 
     const fetchPageContent = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/pages/${params.pageName}`);
-        
+        const response = await axios.get(
+          API_ENDPOINTS.PAGE_BY_NAME(params.pageName),
+        );
+
         if (response.data && response.data.content) {
           setSections(response.data.content);
         }
@@ -77,7 +80,7 @@ const PageEditorPage = () => {
       }));
 
       await axios.post(
-        "http://localhost:5000/api/pages/bulk",
+        `${API_ENDPOINTS.PAGES}/bulk`,
         {
           page_name: params.pageName,
           sections: sectionsArray,
@@ -86,7 +89,7 @@ const PageEditorPage = () => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       setSuccess("Page content updated successfully!");
@@ -116,23 +119,37 @@ const PageEditorPage = () => {
     );
   }
 
-  const pageTitle = params.pageName.charAt(0).toUpperCase() + params.pageName.slice(1);
+  const pageTitle =
+    params.pageName.charAt(0).toUpperCase() + params.pageName.slice(1);
 
   return (
-    <div className="min-h-screen bg-neutral-50 text-neutral-800" style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>
+    <div
+      className="min-h-screen bg-neutral-50 text-neutral-800"
+      style={{
+        fontFamily:
+          "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      }}
+    >
       {/* Header */}
       <header className="bg-white border-b border-neutral-200">
         <div className="max-w-[1440px] mx-auto px-8 lg:px-20">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-6">
               <Link href="/admin/dashboard" className="flex items-center gap-2">
-                <span className="text-xl font-bold text-emerald-800">ESGFuture</span>
+                <span className="text-xl font-bold text-emerald-800">
+                  ESGFuture
+                </span>
                 <span className="text-sm text-neutral-500">Admin</span>
               </Link>
             </div>
             <div className="flex items-center gap-4">
-              <span className="text-sm text-neutral-600">Welcome, {admin.name}</span>
-              <button onClick={handleLogout} className="inline-flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:text-red-700 transition-colors">
+              <span className="text-sm text-neutral-600">
+                Welcome, {admin.name}
+              </span>
+              <button
+                onClick={handleLogout}
+                className="inline-flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:text-red-700 transition-colors"
+              >
                 <LogOut className="w-4 h-4" />
                 Logout
               </button>
@@ -145,19 +162,31 @@ const PageEditorPage = () => {
         {/* Sidebar */}
         <aside className="w-64 bg-white border-r border-neutral-200 min-h-[calc(100vh-4rem)]">
           <nav className="p-6 space-y-2">
-            <Link href="/admin/dashboard" className="flex items-center gap-3 px-4 py-3 text-neutral-600 hover:text-emerald-800 hover:bg-emerald-50 rounded-lg font-medium transition-all">
+            <Link
+              href="/admin/dashboard"
+              className="flex items-center gap-3 px-4 py-3 text-neutral-600 hover:text-emerald-800 hover:bg-emerald-50 rounded-lg font-medium transition-all"
+            >
               <BarChart3 className="w-5 h-5" />
               Dashboard
             </Link>
-            <Link href="/admin/reports" className="flex items-center gap-3 px-4 py-3 text-neutral-600 hover:text-emerald-800 hover:bg-emerald-50 rounded-lg font-medium transition-all">
+            <Link
+              href="/admin/reports"
+              className="flex items-center gap-3 px-4 py-3 text-neutral-600 hover:text-emerald-800 hover:bg-emerald-50 rounded-lg font-medium transition-all"
+            >
               <FileText className="w-5 h-5" />
               Reports
             </Link>
-            <Link href="/admin/pages" className="flex items-center gap-3 px-4 py-3 text-emerald-800 bg-emerald-50 rounded-lg font-medium">
+            <Link
+              href="/admin/pages"
+              className="flex items-center gap-3 px-4 py-3 text-emerald-800 bg-emerald-50 rounded-lg font-medium"
+            >
               <Settings className="w-5 h-5" />
               Pages
             </Link>
-            <Link href="/admin/team" className="flex items-center gap-3 px-4 py-3 text-neutral-600 hover:text-emerald-800 hover:bg-emerald-50 rounded-lg font-medium transition-all">
+            <Link
+              href="/admin/team"
+              className="flex items-center gap-3 px-4 py-3 text-neutral-600 hover:text-emerald-800 hover:bg-emerald-50 rounded-lg font-medium transition-all"
+            >
               <Users className="w-5 h-5" />
               Team
             </Link>
@@ -169,12 +198,19 @@ const PageEditorPage = () => {
           <div className="max-w-4xl mx-auto">
             {/* Page Header */}
             <div className="mb-8">
-              <Link href="/admin/pages" className="inline-flex items-center gap-2 text-emerald-800 hover:text-emerald-700 mb-4">
+              <Link
+                href="/admin/pages"
+                className="inline-flex items-center gap-2 text-emerald-800 hover:text-emerald-700 mb-4"
+              >
                 <ArrowLeft className="w-4 h-4" />
                 Back to Pages
               </Link>
-              <h1 className="text-3xl font-bold text-neutral-900 mb-2">Edit {pageTitle} Page</h1>
-              <p className="text-neutral-600">Update content for the {pageTitle.toLowerCase()} page</p>
+              <h1 className="text-3xl font-bold text-neutral-900 mb-2">
+                Edit {pageTitle} Page
+              </h1>
+              <p className="text-neutral-600">
+                Update content for the {pageTitle.toLowerCase()} page
+              </p>
             </div>
 
             {error && (
@@ -190,14 +226,20 @@ const PageEditorPage = () => {
             )}
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-neutral-200/50 p-8">
+            <form
+              onSubmit={handleSubmit}
+              className="bg-white rounded-xl border border-neutral-200/50 p-8"
+            >
               <div className="space-y-8">
                 {Object.keys(sections).map((sectionKey) => (
-                  <div key={sectionKey} className="border-b border-neutral-200 pb-6 last:border-b-0">
+                  <div
+                    key={sectionKey}
+                    className="border-b border-neutral-200 pb-6 last:border-b-0"
+                  >
                     <h3 className="text-lg font-semibold text-neutral-900 mb-4 capitalize">
                       {sectionKey.replace(/_/g, " ")}
                     </h3>
-                    
+
                     <div className="space-y-4">
                       <div>
                         <label className="block text-sm font-semibold text-neutral-900 mb-2">
@@ -206,7 +248,13 @@ const PageEditorPage = () => {
                         <input
                           type="text"
                           value={sections[sectionKey].title || ""}
-                          onChange={(e) => handleSectionChange(sectionKey, "title", e.target.value)}
+                          onChange={(e) =>
+                            handleSectionChange(
+                              sectionKey,
+                              "title",
+                              e.target.value,
+                            )
+                          }
                           className="w-full px-4 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-800 focus:border-transparent"
                           placeholder="Section title"
                         />
@@ -218,7 +266,13 @@ const PageEditorPage = () => {
                         </label>
                         <textarea
                           value={sections[sectionKey].content || ""}
-                          onChange={(e) => handleSectionChange(sectionKey, "content", e.target.value)}
+                          onChange={(e) =>
+                            handleSectionChange(
+                              sectionKey,
+                              "content",
+                              e.target.value,
+                            )
+                          }
                           rows="4"
                           className="w-full px-4 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-800 focus:border-transparent"
                           placeholder="Section content"

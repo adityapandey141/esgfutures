@@ -2,8 +2,9 @@
 import React, { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { useAuth } from "../../../../context/AuthContext";
-import Link from "next/link";
+import { API_ENDPOINTS } from "../../../../config/api";
 import axios from "axios";
+import Link from "next/link";
 import {
   FileText,
   Users,
@@ -43,14 +44,11 @@ const EditTeamMemberPage = () => {
 
     const fetchTeamMember = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:5000/api/team/${params.id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+        const response = await axios.get(API_ENDPOINTS.TEAM_BY_ID(params.id), {
+          headers: {
+            Authorization: `Bearer ${token}`,
           },
-        );
+        });
 
         if (response.data && response.data.teamMember) {
           const member = response.data.teamMember;
@@ -106,7 +104,7 @@ const EditTeamMemberPage = () => {
       }
 
       const response = await axios.put(
-        `http://localhost:5000/api/team/${params.id}`,
+        API_ENDPOINTS.TEAM_BY_ID(params.id),
         data,
         {
           headers: {
