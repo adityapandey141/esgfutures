@@ -73,6 +73,19 @@ app.use("*", (req, res) => {
   res.status(404).json({ error: "Route not found" });
 });
 
-app.listen(PORT, () => {
-  console.log(`ESG Futures CMS Server running on port ${PORT}`);
-});
+// Initialize database and start server
+const initDatabase = require("./scripts/initDatabase");
+
+async function startServer() {
+  try {
+    await initDatabase();
+    app.listen(PORT, () => {
+      console.log(`ESG Futures CMS Server running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error("Failed to start server:", error);
+    process.exit(1);
+  }
+}
+
+startServer();
