@@ -37,7 +37,7 @@ export const SiteProvider = ({ children }) => {
   const fetchReports = async (filters = {}) => {
     try {
       const params = new URLSearchParams(filters);
-      const response = await axios.get(`${API_BASE_URL}/reports?${params}`);
+      const response = await axios.get(`${API_BASE_URL}/api/reports?${params}`);
       return response.data.reports;
     } catch (error) {
       console.error("Error fetching reports:", error);
@@ -48,7 +48,7 @@ export const SiteProvider = ({ children }) => {
   // Fetch single report by slug
   const fetchReportBySlug = async (slug) => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/reports/${slug}`);
+      const response = await axios.get(`${API_BASE_URL}/api/reports/${slug}`);
       return response.data.report;
     } catch (error) {
       console.error("Error fetching report:", error);
