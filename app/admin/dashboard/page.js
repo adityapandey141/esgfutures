@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../../context/AuthContext";
 import { useSite } from "../../context/SiteContext";
+import { API_ENDPOINTS } from "../../config/api";
 import Link from "next/link";
 import {
   FileText,
@@ -40,7 +41,7 @@ const AdminDashboard = () => {
     // Fetch real statistics from backend
     const fetchStats = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/stats", {
+        const response = await fetch(API_ENDPOINTS.STATS, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
