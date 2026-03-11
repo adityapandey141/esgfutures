@@ -206,13 +206,14 @@ const EditReportPage = () => {
               <FileText className="w-5 h-5" />
               Reports
             </Link>
-            <Link
+            {/* Page Management - Hidden */}
+            {/* <Link
               href="/admin/pages"
               className="flex items-center gap-3 px-4 py-3 text-neutral-600 hover:text-emerald-800 hover:bg-emerald-50 rounded-lg font-medium transition-all"
             >
               <Settings className="w-5 h-5" />
               Pages
-            </Link>
+            </Link> */}
             <Link
               href="/admin/team"
               className="flex items-center gap-3 px-4 py-3 text-neutral-600 hover:text-emerald-800 hover:bg-emerald-50 rounded-lg font-medium transition-all"
