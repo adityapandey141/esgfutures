@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import MainLayout from "../layouts/MainLayout";
+import { API_ENDPOINTS } from "../config/api";
 import {
   Mail,
   Phone,
@@ -40,10 +41,7 @@ export default function ContactPage() {
     setSuccess(false);
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/contact",
-        formData,
-      );
+      const response = await axios.post(API_ENDPOINTS.CONTACT, formData);
 
       if (response.data) {
         setSuccess(true);

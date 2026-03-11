@@ -1,6 +1,7 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useSite } from "../context/SiteContext";
+import { getImageUrl } from "../config/api";
 import Link from "next/link";
 import MainLayout from "../layouts/MainLayout";
 import {
@@ -129,7 +130,7 @@ const TeamPage = () => {
               <div className="aspect-square bg-gradient-to-br from-emerald-100 to-slate-100 rounded-2xl border border-neutral-200/50 shadow-xl overflow-hidden">
                 {founder.profile_image ? (
                   <img
-                    src={`http://localhost:5000${founder.profile_image}`}
+                    src={getImageUrl(founder.profile_image)}
                     alt={founder.name}
                     className="w-full h-full object-cover"
                   />
@@ -181,7 +182,7 @@ const TeamPage = () => {
                   <div className="aspect-square bg-neutral-100 overflow-hidden">
                     {member.profile_image ? (
                       <img
-                        src={`http://localhost:5000${member.profile_image}`}
+                        src={getImageUrl(member.profile_image)}
                         alt={member.name}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />

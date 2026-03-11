@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useSite } from "../context/SiteContext";
+import { getImageUrl } from "../config/api";
 import Link from "next/link";
 import MainLayout from "../layouts/MainLayout";
 import {
@@ -200,7 +201,7 @@ const ReportsPage = () => {
                   {report.featured_image && (
                     <div className="aspect-video bg-neutral-100 overflow-hidden">
                       <img
-                        src={`http://localhost:5000${report.featured_image}`}
+                        src={getImageUrl(report.featured_image)}
                         alt={report.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />

@@ -1,7 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useSite } from "../../context/SiteContext";
+import { getImageUrl } from "../../config/api";
 import Link from "next/link";
 import MainLayout from "../../layouts/MainLayout";
 import { formatReportContent } from "../../utils/formatContent";
@@ -161,7 +162,7 @@ const ReportPage = () => {
           {report.featured_image && (
             <div className="aspect-video bg-neutral-100 rounded-xl overflow-hidden mb-8">
               <img
-                src={`http://localhost:5000${report.featured_image}`}
+                src={getImageUrl(report.featured_image)}
                 alt={report.title}
                 className="w-full h-full object-cover"
               />
@@ -213,7 +214,7 @@ const ReportPage = () => {
                     {relatedReport.featured_image && (
                       <div className="aspect-video bg-neutral-100 overflow-hidden">
                         <img
-                          src={`http://localhost:5000${relatedReport.featured_image}`}
+                          src={getImageUrl(relatedReport.featured_image)}
                           alt={relatedReport.title}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
